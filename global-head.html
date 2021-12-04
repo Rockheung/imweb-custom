@@ -1,0 +1,618 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"
+  integrity="sha256-VeNaFBVDhoX3H+gJ37DpT/nTuZTdjYro9yBruHjVmoQ=" crossorigin="anonymous"></script>
+<style>
+  /**
+  Home(Genre) 에서 슬라이드 상단 반응형 대응
+  */
+  .rock-1SQk8wu.slide-header {
+    position: relative;
+    margin: 130px;
+  }
+
+  .rock-1SQk8wu.slide-title {
+    margin-bottom: 23px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .rock-1SQk8wu.slide-description {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+
+  .rock-1SQk8wu.slide-button {}
+
+  @media (max-width: 1450px) {
+    .rock-1SQk8wu.slide-header {
+      margin: 90px;
+    }
+  }
+
+  @media (max-width: 990px) {
+    .rock-1SQk8wu.slide-header {
+      margin: 60px;
+    }
+
+    .rock-1SQk8wu.slide-description {
+      position: relative;
+    }
+  }
+
+  @media (max-width: 415px) {
+    .rock-1SQk8wu {
+      text-align: center;
+    }
+
+    .rock-1SQk8wu.slide-title {
+      margin-top: 0px;
+      margin-bottom: 26px;
+    }
+
+    .rock-1SQk8wu.slide-header {
+      padding: 64px 30px 60px;
+      margin: 0;
+    }
+
+    .rock-1SQk8wu.slide-description {
+      position: relative;
+      margin-bottom: 26px;
+    }
+
+    .rock-1SQk8wu.slide-button {
+      width: 100%;
+      height: 45px;
+      line-height: 45px;
+      padding: 0;
+    }
+  }
+
+  /* 상단 헤더 PC, Mobile*/
+  #inline_header_mobile .badge._shop_cart_badge_cnt_wrap,
+  #inline_header_normal .badge._shop_cart_badge_cnt_wrap,
+  #inline_header_fixed .badge._shop_cart_badge_cnt_wrap {
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 9px;
+    font-size: 14px !important;
+    padding: 2px !important;
+  }
+
+  /* 고정 헤더 */
+  #inline_header_normal .badge._shop_cart_badge_cnt_wrap,
+  #inline_header_fixed .badge._shop_cart_badge_cnt_wrap {
+    transition: 0.3s;
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 9px;
+    font-size: 14px !important;
+    padding: 2px !important;
+  }
+
+  #inline_header_mobile .badge._shop_cart_badge_cnt_wrap {
+    margin-bottom: 2px;
+  }
+
+  #w20200608b72a6472268f0>div>div>a {
+    padding-top: 12px !important;
+    padding-bottom: 8px !important;
+  }
+
+  #w202006059d82c1b790779 .badge._shop_cart_badge_cnt_wrap:hover,
+  #w2020072710a79e16f40ac .badge._shop_cart_badge_cnt_wrap:hover {
+    background-color: #040922;
+  }
+
+  /* 기획전 상품 설명 */
+  div[data-widget-type="shop_showcase"] .shop-item {
+    position: relative;
+  }
+
+  div[data-widget-type="shop_showcase"] .shop-item .item-detail {
+    padding-left: 16px;
+    padding-right: 16px;
+    min-height: 64px;
+  }
+
+  div[data-widget-type="shop_showcase"] .shop-item .item-detail a {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    justify-content: flex-end;
+  }
+
+  div[data-widget-type="shop_showcase"] .shop-item .item-pay {
+    flex: 1;
+    max-width: calc(100% - 50px);
+  }
+
+  div[data-widget-type="shop_showcase"] .shop-item .item-pay .item-pay-detail {
+    position: absolute;
+    bottom: 1px;
+  }
+
+  div[data-widget-type="shop_showcase"] .shop-item .item-pay h2 {
+    word-break: normal;
+    margin-bottom: 20px;
+  }
+
+  div[data-widget-type="shop_showcase"] .color_tools {
+    width: 50px;
+    margin-bottom: 20px !important;
+    margin-top: 6px !important;
+    text-align: right !important;
+  }
+
+  div[data-widget-type="shop_showcase"] .color_tools span {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  div[data-widget-type="shop_showcase"] .ns-icon {
+    position: absolute;
+    margin: 0;
+    right: 4px;
+    top: 0;
+  }
+
+  div[data-widget-type="shop_showcase"] .ns-icon img {
+    width: 5.73vw !important;
+  }
+
+  div[data-widget-type="shop_showcase"] .item-icon {
+    position: absolute;
+    right: 20px;
+    bottom: 0px;
+  }
+
+  div[data-widget-type="shop_showcase"] .item-summary {
+    display: none !important;
+  }
+
+  img[data-badge-custom-by-rock] {
+    width: auto !important;
+    height: 2.06vw !important;
+  }
+
+  @media (max-width: 991px) {
+    div[data-widget-type="shop_showcase"] .ns-icon img {
+      width: auto !important;
+      height: 4.24vw !important;
+    }
+
+    img[data-badge-custom-by-rock] {
+      width: auto !important;
+      height: 4.24vw !important;
+    }
+  }
+
+  @media (max-width: 990px) {
+    div[data-widget-type="shop_showcase"] {
+      margin: 0 15px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    div[data-widget-type="shop_showcase"] .item-icon {
+      right: 7.5px;
+    }
+  }
+
+  /* Shop All: 상품 전체 목록 */
+  div[data-widget-type="shopping"] .shop-item {
+    position: relative;
+  }
+
+  div[data-widget-type="shopping"] .item-detail {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    justify-content: flex-end;
+    padding-left: 16px;
+    padding-right: 16px;
+    min-height: 64px;
+    /* padding: 0 !important; */
+  }
+
+  div[data-widget-type="shopping"] .item-pay {
+    flex: 1;
+    max-width: calc(100% - 50px);
+  }
+
+  div[data-widget-type="shopping"] .item-pay h2 {
+    word-break: normal;
+    margin-bottom: 20px;
+  }
+
+  div[data-widget-type="shopping"] .item-pay-detail {
+    position: absolute;
+    bottom: 36px;
+  }
+
+  div[data-widget-type="shopping"] .color_tools {
+    width: 50px;
+    margin-bottom: 20px !important;
+    margin-top: 7px;
+    text-align: right !important;
+  }
+
+  div[data-widget-type="shopping"] .color_tools span {
+    width: 10px !important;
+    height: 10px !important;
+  }
+
+  div[data-widget-type="shopping"] .item-icon {
+    position: absolute;
+    right: 20px;
+    bottom: 35px;
+  }
+
+  div[data-widget-type="shopping"] .ns-icon {
+    position: absolute;
+    margin: 0;
+    right: 4px;
+    top: 0;
+  }
+
+  div[data-widget-type="shopping"] .ns-icon img {
+    width: 5.73vw !important;
+  }
+
+  div[data-widget-type="shopping"] .item-summary {
+    display: none !important;
+  }
+
+  @media (max-width: 991px) {
+    div[data-widget-type="shopping"] .ns-icon img {
+      width: 11.8vw !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    div[data-widget-type="shopping"] .item-icon {
+      right: 7.5px;
+    }
+
+    div[data-widget-type="shopping"] .item-pay-detail {
+      bottom: 1px;
+    }
+
+    div[data-widget-type="shopping"] .item-icon {
+      bottom: 0;
+    }
+  }
+
+  /** 푸터 sns 사이즈 */
+  #doz_footer div.foot-sociallink._sns_link i {
+    transform: scale(1.4);
+  }
+
+  #doz_footer>div>div>div.footer-wrap>div.foot-sociallink._sns_link>div>a.btn.pull-right._2B706l0583>i {
+    transform: scale(1.2) translateY(1px);
+  }
+
+  /** 상품상세 */
+
+  @media (min-width: 992px) {
+    div[data-widget-type="shop_view"] .row.goods_wrapper {
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      width: calc(100vw - 210px);
+      margin: auto;
+    }
+
+    div[data-widget-type="shop_view"] .row.goods_wrapper>div {
+      border: solid 1px #040922;
+      width: calc(50vw - 105px);
+      height: calc(50vw - 105px);
+      padding: 0;
+      display: inline-block;
+    }
+
+    div[data-widget-type="shop_view"] .row.goods_wrapper>div:last-child {
+      border-left: 0;
+      padding: 30px;
+    }
+
+    div[data-widget-type="shop_view"] #prod_image_list {
+      height: 100%;
+    }
+
+    div[data-widget-type="shop_view"] #prod_image_list .item {
+      height: 100%;
+    }
+
+    div[data-widget-type="shop_view"] #prod_image_list .item img {
+      display: block;
+      width: auto;
+      height: 100%;
+      margin: 0 auto;
+    }
+
+    div[data-widget-type="shop_view"] .goods_form {
+      padding: 0;
+    }
+
+    div[data-widget-type="shop_view"] .ns-icon {
+      position: absolute;
+      margin: 0;
+      top: 0;
+      right: 0;
+    }
+
+    div[data-widget-type="shop_view"] .ns-icon img {
+      width: 100px !important;
+    }
+
+    div[data-widget-type="shop_view"] .goods_summary {
+      display: none;
+    }
+
+    div[data-widget-type="shop_view"] .buy_btns.pc {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+    }
+
+    div[data-widget-type="shop_view"] .buy_btns.pc a.btn {
+      width: auto !important;
+      margin-left: -1px !important;
+      flex: 1;
+    }
+
+    div[data-widget-type="shop_view"] .buy_btns.pc a.btn:last-child {
+      border-right: 0px;
+    }
+  }
+
+  @media (min-width: 1311px) and (max-width: 1730px) {
+    div[data-widget-type="shop_view"] .row.goods_wrapper>div:last-child {
+      padding: 70px;
+    }
+
+  }
+
+  @media (min-width: 1731px) {
+    div[data-widget-type="shop_view"] .row.goods_wrapper>div:last-child {
+      padding: 140px;
+    }
+
+  }
+
+  @media (min-width: 992px) and (max-width: 1310px) {
+    div[data-widget-type="shop_view"] .row.goods_wrapper {
+      width: 100vw;
+      margin: auto;
+    }
+
+    div[data-widget-type="shop_view"] .row.goods_wrapper>div {
+      width: 50vw;
+      height: 50vw;
+    }
+
+    div[data-widget-type="shop_view"] .fr-view .fr-dib {
+      width: 60vw !important;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 991px) and (min-width: 767px) {
+    div[data-widget-type="shop_view"] .row.goods_wrapper .goods_form {
+      padding: 70px;
+      margin: 0 auto;
+    }
+
+    img[data-badge-custom-by-rock] {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 766px) {
+    img[data-badge-custom-by-rock] {
+      display: none !important;
+    }
+  }
+
+  #w202006059d82c1b790779>div>div>div>div:nth-child(1),
+  #w2020072710a79e16f40ac>div>div>div>div:nth-child(1) {
+    transform: translateY(3px);
+  }
+
+  /* 버튼 작업 */
+  div[data-widget-type="shop_showcase"] .type-slide {
+    padding-left: 105px;
+  }
+
+  div[data-widget-type="shop_showcase"] a.owl_prev_button,
+  div[data-widget-type="shop_showcase"] img.pause_mark_left {
+    position: absolute;
+    left: 15px;
+    top: 10vw;
+    z-index: 99;
+    width: 75px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  div[data-widget-type="shop_showcase"] a.owl_prev_button img {
+    width: 75px;
+  }
+
+  div[data-widget-type="shop_showcase"] a.owl_next_button,
+  div[data-widget-type="shop_showcase"] img.pause_mark_right {
+    position: absolute;
+    right: 15px;
+    top: 10vw;
+    z-index: 99;
+    width: 75px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  div[data-widget-type="shop_showcase"] a.owl_next_button img {
+    width: 75px;
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 990px) {
+
+    div[data-widget-type="shop_showcase"] a.owl_prev_button,
+    div[data-widget-type="shop_showcase"] a.owl_prev_button img,
+    div[data-widget-type="shop_showcase"] a.owl_next_button,
+    div[data-widget-type="shop_showcase"] a.owl_next_button img,
+    div[data-widget-type="shop_showcase"] img.pause_mark_right,
+    div[data-widget-type="shop_showcase"] img.pause_mark_left {
+      width: 55px;
+    }
+
+    div[data-widget-type="shop_showcase"] a.owl_next_button,
+    div[data-widget-type="shop_showcase"] img.pause_mark_right {
+      right: 0;
+      top: calc((100vw - 35px) / 4);
+    }
+
+    div[data-widget-type="shop_showcase"] a.owl_prev_button,
+    div[data-widget-type="shop_showcase"] img.pause_mark_left {
+      left: 0;
+      top: calc((100vw - 35px) / 4);
+    }
+
+    div[data-widget-type="shop_showcase"] .type-slide {
+      padding-left: 35px;
+    }
+  }
+
+  div[data-widget-type="shop_showcase"] a.owl_prev_button.pause,
+  div[data-widget-type="shop_showcase"] a.owl_next_button.pause,
+  div[data-widget-type="shop_showcase"] img.pause_mark_left.pause,
+  div[data-widget-type="shop_showcase"] img.pause_mark_right.pause {
+    display: none;
+    overflow: hidden;
+  }
+
+  main>div[doz_type="inside"] .shop-item,
+  main>div[doz_type="inside"],
+  main>div[doz_type="aside"],
+  main>div.side_gutter {
+    transition: all 0.15s linear 0s;
+  }
+
+  main>div[doz_type="aside"].folded,
+  main>div.side_gutter.folded {
+    left: -330px;
+    padding-left: 0px !important;
+    width: 0px !important;
+  }
+
+  main>div[doz_type="inside"].folded {
+    padding-left: 0px !important;
+  }
+
+  a[data-unfold-custom-by-rock].folded i {
+    transform: rotate(-90deg);
+  }
+
+  @media (max-width: 991px) {
+    a[data-unfold-custom-by-rock] {
+      display: none;
+    }
+  }
+
+  .prod_icon.new {
+    background-color: rgb(113, 175, 58);
+    border: 1px solid rgb(113, 175, 58);
+  }
+
+  .prod_icon.hot {
+    background-color: rgb(230, 0, 69);
+    border: 1px solid rgb(230, 0, 69);
+    color: #fff;
+  }
+
+  div[data-widget-type="shop_view"] .prod_icon.icon_default {
+    background-color: rgb(230, 0, 69);
+    border: 1px solid rgb(230, 0, 69);
+    color: #fff;
+  }
+
+  #doz_header .viewport-nav.desktop._main_menu>li.dropdown:nth-child(1)>a,
+  #mobile_slide_menu .viewport-nav.mobile._menu_wrap>li:nth-child(2)>a {
+    cursor: default;
+  }
+
+  @media (max-width: 768px) {
+    div[data-widget-type="shop_cart"] .modal-content {
+      height: 100%;
+    }
+
+    div[data-widget-type="shop_cart"] .modal.in.modal_widget_cartopt .bottom-btn {
+      padding: 0;
+      position: absolute;
+      bottom: 0;
+    }
+
+    div[data-widget-type="shop_cart"] .modal.in.modal_widget_cartopt .bottom-btn a {
+      height: 50px;
+      width: 50%;
+      margin: 0;
+      border-radius: 0;
+      font-size: 16px;
+      line-height: 0;
+      padding: 24px;
+    }
+  }
+
+  #prod_goods_form header div.view_tit {
+    margin-bottom: 25px;
+  }
+
+  #doz_footer a,
+  #doz_footer p {
+    font-size: 14px;
+  }
+
+  #doz_footer .footer-section .inside {
+    margin: 30px;
+    max-width: none;
+  }
+
+  #doz_footer .footer-section .footer-company-customized-by-rock {
+    display: flex;
+    margin: 15px;
+  }
+
+  #doz_footer .footer-section .footer-company-customized-by-rock div {
+    flex: 1;
+  }
+
+  #doz_footer .footer-section .footer-company-customized-by-rock div:first-child {
+    flex-grow: 0.39;
+  }
+
+  #doz_footer .site-brand {
+    display: none;
+  }
+
+  @media (max-width: 992px) {
+    #doz_footer .footer-section .inside {
+      margin: 0;
+    }
+
+    #doz_footer .footer-section .footer-company-customized-by-rock {
+      flex-direction: column;
+      margin: 30px 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #doz_footer .foot-sociallink {
+      margin-left: 37vw;
+      margin-top: -8%;
+    }
+  }
+</style>

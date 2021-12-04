@@ -1,0 +1,32 @@
+<!-- review naverpay -->
+<script>
+  void (function () {
+    console.log("Start");
+    const _originUri = 'pick-ring.com';
+    $(
+      'div.widget.board._list_wrap.m-margin-on > div.li_board > ul a._fade_link[href*="' +
+        _originUri +
+        '"]'
+    ).each(function (_, boardItem) {
+      var _commentUri = this.pathname + this.search;
+      Promise.resolve(
+        fetch(_commentUri)
+          .then(function (res) {
+            return res.text();
+          })
+          .then(function (html) {
+            console.log(html);
+            $($($(boardItem).parents()[1]).children()[1]).prepend(
+              $(
+                'img[src^="https://cdn.imweb.me/thumbnail"].xzoom-gallery',
+                $.parseHTML(html)
+              )
+                .first()
+                .css("margin-right", "5px")
+                .css("height", "70px")
+            );
+          })
+      );
+    });
+  })();
+</script>

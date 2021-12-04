@@ -1,0 +1,180 @@
+<!-- music player -->
+<style>
+  .audio-ctrl {
+    height: 36px;
+    display: flex !important;
+    flex: 1;
+    justify-content: center;
+align-items: center;
+  }
+.audio-ctrl p {
+margin-bottom: 0;
+margin-right: 30px;
+}
+</style>
+<script>
+var genreNameTag = document.querySelector("div[data-genre]");
+if (!genreNameTag) {
+document.querySelectorAll(".audio-ctrl").forEach(function (_anchor) {
+  _anchor.setAttribute("style", "display: none;");
+});
+}
+
+function playNow() {
+if (genreNameTag.dataset.genre !== "ROCK") {
+  return;
+}
+var bgmPlayer = document.querySelector("#bgm-player");
+if (bgmPlayer.paused) {
+  document
+    .querySelectorAll(".audio-ctrl img.audio-pause")
+    .forEach(function (_img) {
+      _img.setAttribute("style", "display: none");
+    });
+  document
+    .querySelectorAll(".audio-ctrl img.audio-play")
+    .forEach(function (_img) {
+      _img.setAttribute("style", "display: auto");
+    });
+  var bgmPlayedPromise = bgmPlayer.play();
+  if (bgmPlayedPromise !== undefined) {
+    bgmPlayedPromise.catch((err) => {
+      if (err.name === "NotAllowedError") {
+        alert("Click play button!");
+      }
+    });
+    return;
+  }
+}
+document
+  .querySelectorAll(".audio-ctrl img.audio-pause")
+  .forEach(function (_img) {
+    _img.setAttribute("style", "display: auto");
+  });
+
+document
+  .querySelectorAll(".audio-ctrl img.audio-play")
+  .forEach(function (_img) {
+    _img.setAttribute("style", "display: none");
+  });
+
+bgmPlayer.pause();
+}
+
+$(document).ready(function () {
+$(".bgm-container").each(function () {
+  $(
+    '<audio id="bgm-player" loop>' +
+      '<source src="https://res.cloudinary.com/pickring/video/upload/v1603967128/audio/MR%E1%84%8C%E1%85%A2%E1%84%87%E1%85%AE%E1%84%90%E1%85%B5%E1%86%BC-%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%A6_%E1%84%89%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%84%91%E1%85%A5_%E1%84%80%E1%85%B5%E1%86%B7%E1%84%8C%E1%85%A2%E1%84%80%E1%85%A7%E1%86%B7_to7p91.wav" />' +
+      "Your browser does not support the<code>audio</code> element." +
+      "</audio>" +
+      '<a href="javascript:playNow();" class="audio-ctrl">' +
+'<p>눌러서 음악 재생</p>'+
+      '<img class="audio-pause" src="https://res.cloudinary.com/pickring/image/upload/v1603974477/res/pause-button_yavde4.svg" alt="pause-button"/>' +
+      '<img class="audio-play" style="display: none" src="https://res.cloudinary.com/pickring/image/upload/v1603974477/res/play-button_ydwqhe.svg" alt="play-button"/>' +
+      "</a>"
+  ).insertAfter(this);
+});
+});
+</script>
+
+<!-- naver pay custom -->
+<style>
+  #w202006031a095328dd511 .shop_sub_depth {
+    display: none !important;
+  }
+
+  @media (min-width: 769px) {
+    #naverPayWrap {
+      display: none;
+    }
+    a[id^="NPAY_BUY_LINK_IDNC_ID_"] {
+    }
+    a[id^="NPAY_BUY_LINK_IDNC_ID_"] span {
+      display: none;
+    }
+    div.buy_btns.holder.pc {
+      display: flex;
+
+    }
+    div.buy_btns.holder.pc a {
+      height: 37px;
+      width: auto;
+      font-size: 12px;
+      flex: 1;
+      margin: 0 !important;
+      padding: 0;
+      line-height: 35px;
+    }
+  }
+  
+  @media (min-width: 1311px) {
+    div[data-widget-type="shop_view"] .shop_view_body > p ,
+    div[data-widget-type="shop_view"] .shop_view_body > a ,
+    div[data-widget-type="shop_view"] .shop_view_body > ul ,
+    div[data-widget-type="shop_view"] .shop_view_body > ol ,
+    div[data-widget-type="shop_view"] .shop_view_body > nav ,
+    div[data-widget-type="shop_view"] .shop_view_body > blockquote ,
+    div[data-widget-type="shop_view"] .shop_view_body > div {
+	  display: block;
+      width: 40vw !important;
+      max-width: 990px;
+      margin: 15px auto;
+    }
+
+    div[data-widget-type="shop_view"] .shop_view_body > p > * {
+      margin: 5px 0;
+    }
+  }
+</style>
+<script>
+  (function () {
+    var _count = 0;
+    function getCategoryAnchor() {
+      var categoryAnchor = $(
+        'div[data-widget-type="shop_view"] .shop_sub_depth li'
+      ).slice(2);
+      var categoryAnchorText = categoryAnchor.text();
+      if (
+        // $(categoryAnchor[0]).html() &&
+        $('div[data-widget-type="shop_view"] .goods_wrapper .margin-bottom-xxl')
+          .length
+      ) {
+        var _href;
+        $("#dropdown_m2020060376defda931b87 > ul > li > a > span").each(
+          function (_, ele) {
+            if (categoryAnchorText === $(ele).text()) {
+              _href = $(ele).parent().data("url");
+            }
+          }
+        );
+
+        console.log(_href, categoryAnchorText);
+
+        var genreAnchor =
+          '<a href="/' + _href + '">' + categoryAnchorText + "</a>";
+        $(
+          'div[data-widget-type="shop_view"] .goods_wrapper .margin-bottom-xxl'
+        ).prepend(
+          '<div class="option_wrap" style="display: block; font-size:12px; "><div class="inline-blocked vertical-middle"><span class="option_title text-bold">Genre</span></div><div class="inline-blocked vertical-middle"><span class="option_data">' +
+            genreAnchor +
+            "</span></div></div>"
+        );
+      } else {
+        console.log("failed getCategoryAnchor, try again.", _count);
+        _count += 1;
+        if (_count < 10) {
+          setTimeout(getCategoryAnchor, 500);
+        }
+      }
+    }
+
+    function naverPayCustom() {
+      $('a[id^="NPAY_BUY_LINK_IDNC_ID_"]').attr('target','_blank');
+      $("div.buy_btns.holder.pc").prepend($('a[id^="NPAY_BUY_LINK_IDNC_ID_"]'));
+    }
+
+    $(document).ready(naverPayCustom);
+    $(window).load(getCategoryAnchor);
+  })();
+</script>
