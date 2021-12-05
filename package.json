@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Rockheung/imweb-custom#readme",
   "devDependencies": {
+    "@types/jquery": "^1.10.37",
     "@types/lodash": "^4.14.177",
     "html-webpack-plugin": "^5.5.0",
     "serve": "^13.0.2",
