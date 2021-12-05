@@ -5,8 +5,8 @@
     const _originUri = 'pick-ring.com';
     $(
       'div.widget.board._list_wrap.m-margin-on > div.li_board > ul a._fade_link[href*="' +
-        _originUri +
-        '"]'
+      _originUri +
+      '"]'
     ).each(function (_, boardItem) {
       var _commentUri = this.pathname + this.search;
       Promise.resolve(
