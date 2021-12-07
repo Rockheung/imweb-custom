@@ -2,20 +2,23 @@
 console.log(import.meta.webpack); // without reference declared above, TypeScript will throw an error
 
 import * as _ from "lodash";
-import { mul, ajax } from "./lib";
-
-console.log("hello", window.location.pathname, window.location.search);
-const a = (v: any) => new Promise((res) => setTimeout(() => res(v), 3000));
+import { isDev } from "./lib";
 
 async function main() {
-  const sub = _.filter([5, 6, 7, 2, 5, 8, 9], (i) => i > 3);
-  a(sub.reduce(mul)).then(console.log);
-  ajax({
-    url: "/data.json",
-    complete: (xhr, s) => {
-      console.log(xhr.responseJSON);
-    },
-  });
+  const { pathname, searchParams } = new URL(window.location.href);
+  switch (pathname) {
+    case "/": {
+      console.log(pathname);
+      break;
+    }
+    default: {
+      isDev && console.warn("Current path - ", pathname, "has no handled.");
+    }
+  }
 }
 
-main().catch(console.error);
+main()
+  .catch(console.error)
+  .finally(() =>
+    isDev ? console.log("Now Development") : console.log("Now Production")
+  );
