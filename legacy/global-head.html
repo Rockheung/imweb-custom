@@ -209,47 +209,41 @@
   }
 
   div[data-widget-type="shopping"] .item-detail {
-    display: flex;
-    flex-flow: row-reverse wrap;
-    justify-content: flex-end;
     padding-left: 16px;
     padding-right: 16px;
     min-height: 64px;
-    /* padding: 0 !important; */
   }
 
-  div[data-widget-type="shopping"] .item-pay {
-    flex: 1;
-    max-width: calc(100% - 50px);
+  div[data-widget-type="shopping"] .color_tools + div {
+    margin-top: -39px;
   }
 
-  div[data-widget-type="shopping"] .item-pay h2 {
+  /* div[data-widget-type="shopping"] .item-pay h2 {
     word-break: normal;
     margin-bottom: 20px;
-  }
+  } */
 
-  div[data-widget-type="shopping"] .item-pay-detail {
+  /* div[data-widget-type="shopping"] .item-pay-detail {
     position: absolute;
     bottom: 36px;
-  }
+  } */
 
   div[data-widget-type="shopping"] .color_tools {
-    width: 50px;
     margin-bottom: 20px !important;
-    margin-top: 7px;
+    margin-top: 7px !important;
     text-align: right !important;
   }
 
-  div[data-widget-type="shopping"] .color_tools span {
+  /* div[data-widget-type="shopping"] .color_tools span {
     width: 10px !important;
     height: 10px !important;
-  }
+  } */
 
-  div[data-widget-type="shopping"] .item-icon {
+  /* div[data-widget-type="shopping"] .item-icon {
     position: absolute;
-    right: 20px;
-    bottom: 35px;
-  }
+    right: 25px;
+    bottom: 20px;
+  } */
 
   div[data-widget-type="shopping"] .ns-icon {
     position: absolute;
@@ -270,20 +264,33 @@
     div[data-widget-type="shopping"] .ns-icon img {
       width: 11.8vw !important;
     }
+
+    div[data-widget-type="shopping"] .color_tools {
+      text-align: center !important;
+    }
+
+    div[data-widget-type="shopping"] .color_tools + div {
+      margin-top: -14px;
+    }
+
+    div[data-widget-type="shopping"] .item-pay:first-of-type {
+      margin-top: 29px;
+    }
   }
 
   @media (max-width: 768px) {
+
     div[data-widget-type="shopping"] .item-icon {
-      right: 7.5px;
+      position: static;
     }
 
-    div[data-widget-type="shopping"] .item-pay-detail {
+    /* div[data-widget-type="shopping"] .item-pay-detail {
       bottom: 1px;
-    }
+    } */
 
-    div[data-widget-type="shopping"] .item-icon {
+    /* div[data-widget-type="shopping"] .item-icon {
       bottom: 0;
-    }
+    } */
   }
 
   /** 푸터 sns 사이즈 */
